@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import "../../Styles/FlashcardsStyles/FlashcardContainerStyles.css";
-import NewFlashcardComponentForm from './NewFlashcardComponentForm';
+import "../../Styles/FlashcardsStyles/FlashcardsContainerStyles.css";
+import FlashcardsForm from './FlashcardsForm';
 import { motion } from 'framer-motion';
 
-function FlashcardContainer({ question, answer, hint, parameter }) {
+function FlashcardContainer({ question, answer, hint, parameter, collectionName }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -17,7 +17,7 @@ function FlashcardContainer({ question, answer, hint, parameter }) {
   
   const handleFlip = () => {
     if (parameter === "user") {
-      setIsFlipped(!isFlipped); // Toggle the flip state
+      setIsFlipped(!isFlipped);
     }
   };
 
@@ -64,7 +64,7 @@ function FlashcardContainer({ question, answer, hint, parameter }) {
       {isModalOpen && (
         <div className='modal-overlay'>
           <div className='modal'>
-            <NewFlashcardComponentForm closeModal={closeModal} />
+            <FlashcardsForm collectionName={collectionName} closeModal={closeModal} />
           </div>
         </div>
       )}
