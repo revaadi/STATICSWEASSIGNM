@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import "../../Styles/FlashcardsStyles/CollectionContainerStyles.css";
-import AddCollectionComponent from './AddCollectionComponent';
+import "../../Styles/CollectionsStyles/CollectionsContainerStyles.css";
+import CollectionsForm from './CollectionsForm';
 
 function CollectionContainer({ name, parameter, setCurrentCollection }) {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -31,7 +31,7 @@ function CollectionContainer({ name, parameter, setCurrentCollection }) {
       {isModalOpen && (
         <div className='modal-overlay'>
           <div className='modal'>
-            <AddCollectionComponent closeModal={closeModal} />
+            <CollectionsForm closeModal={closeModal} />
           </div>
         </div>
       )}
