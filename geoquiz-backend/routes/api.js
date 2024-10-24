@@ -1,8 +1,6 @@
-const { messageLink } = require('discord.js');
 const express = require('express');
 const router = express.Router();
 const admin = require('firebase-admin');
-const { collection } = require('firebase/firestore/lite');
 const db = admin.firestore();
 const verifyToken = require('../verifyToken');
 
