@@ -21,7 +21,7 @@ function RegistrationForm() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const uid = userCredential.user.uid;
 
-      const response = await axios.post("http://localhost:5000/api/register", {
+      const response = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/register`, {
         uid,
         email,
         firstName,

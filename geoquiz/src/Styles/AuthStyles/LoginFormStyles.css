@@ -63,3 +63,12 @@ input {
     text-align: center;
     margin-top: 1vh;
 }
+
+.forgotPassword {
+    color: var(--black);
+    font-size: 12px;
+}
+
+.forgotPassword:hover {
+    color: var(--blue);
+}

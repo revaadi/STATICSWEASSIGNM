@@ -24,7 +24,7 @@ export function ScoresProvider({ children }) {
         const uid = auth.currentUser?.uid;
         if (!uid) return;
 
-        const response = await axios.get(`http://localhost:5000/api/users/${uid}/scores`, {
+        const response = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/users/${uid}/scores`, {
           headers: {
             Authorization: `Bearer ${idToken}`,
           }

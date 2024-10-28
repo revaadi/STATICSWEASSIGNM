@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/firebase";
+import {useAuth} from "../../Contexts/AuthContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import "../../Styles/AuthStyles/LoginFormStyles.css";
@@ -12,6 +13,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
+  const { resetPassword } = useAuth(); 
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,7 +22,7 @@ function LoginForm() {
       const idToken = await userCredential.user.getIdToken(true);
       console.log('Token:', idToken);
 
-      const response = await axios.post("http://localhost:5000/api/login", { idToken });
+      const response = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/login`, { idToken });
 
       if(response.status === 200){
         alert("Login successful!");
@@ -34,6 +36,19 @@ function LoginForm() {
 
     } catch (error) {
       setError(error.message);
+    }
+  };
+
+  
+  const handleReset = async (e) => {
+    e.preventDefault();
+    try {
+      await resetPassword(email);
+      alert("Password reset email sent! Please check your inbox.");
+      router.push('/loginpage'); 
+    } catch (error) {
+      alert("Error sending password reset email. Please try again.");
+      console.error("Password reset error:", error);
     }
   };
 
@@ -75,6 +90,9 @@ function LoginForm() {
         >
           Login
         </button> 
+        <h2 className="forgotPassword" onClick={handleReset}>
+          Forgot your password?
+        </h2> 
       </form>
     </div>
   )
