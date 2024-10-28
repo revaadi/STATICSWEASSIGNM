@@ -17,7 +17,7 @@ This project is divided into two parts: the **Frontend** and the **Backend**. Ea
    ```
 
 2. **Install Dependencies:**
-   Make sure to install the required dependencies using `npm` or `yarn`.
+   Make sure to install the required dependencies using `npm`.
 
    ```bash
    npm install
@@ -36,6 +36,10 @@ This project is divided into two parts: the **Frontend** and the **Backend**. Ea
 
    ```bash
    npm install framer-motion
+   ```
+
+   ```bash
+   npm install axios
    ```
 
 4. **Environment Variables:**
@@ -79,7 +83,7 @@ This project is divided into two parts: the **Frontend** and the **Backend**. Ea
    Install the necessary dependencies using `npm`:
 
    ```bash
-   npm install
+   npm init -y
    ```
 
 3. **Required Packages:**
@@ -90,7 +94,7 @@ This project is divided into two parts: the **Frontend** and the **Backend**. Ea
    You can install them manually if needed:
 
    ```bash
-   npm install firebase-admin nodemon
+   npm install firebase-admin
    ```
 
    ```bash
@@ -98,7 +102,7 @@ This project is divided into two parts: the **Frontend** and the **Backend**. Ea
    ```
 
 4. **Service Account Key:**
-   You will need to include the `serviceAccountKey.json` file from Firebase for accessing Firebase Admin features. Make sure the `serviceAccountKey.json` file is placed in the `geoquizbackend` directory. This file contains sensitive information, so be sure **not** to commit it to your repository.
+   You will need to include the `serviceAccountKey.json` file from Firebase for accessing Firebase Admin features. Make sure the `serviceAccountKey.json` file is placed in the `geoquiz-backend` directory. This file contains sensitive information, so be sure **not** to commit it to your repository.
 
 5. **Running the Backend:**
    To run the backend with `nodemon` for automatic restarts, use the following command:
