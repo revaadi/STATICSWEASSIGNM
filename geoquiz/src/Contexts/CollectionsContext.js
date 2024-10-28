@@ -22,7 +22,7 @@ export function CollectionsProvider({ children }) {
       try {
         const idToken = await getIdToken();
         const uid = auth.currentUser.uid;
-        const response = await axios.get(`http://localhost:5000/api/users/${uid}/collections`, {
+        const response = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/users/${uid}/collections`, {
           headers: {
             Authorization: `Bearer ${idToken}`,
           }
@@ -47,7 +47,7 @@ export function CollectionsProvider({ children }) {
           const uid = auth.currentUser.uid;
 
           const collectionDetailsPromises = collectionNames.map(async (collectionName) => {
-            const response = await axios.get(`http://localhost:5000/api/users/${uid}/collections/${collectionName}`, {
+            const response = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/users/${uid}/collections/${collectionName}`, {
               headers: {
                 Authorization: `Bearer ${idToken}`,
               }
@@ -70,7 +70,7 @@ export function CollectionsProvider({ children }) {
     try {
       const idToken = await getIdToken();
       const uid = auth.currentUser.uid;
-      const response = await axios.post(`http://localhost:5000/api/users/${uid}/collections`, newCollection, {
+      const response = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/users/${uid}/collections`, newCollection, {
         headers: {
           Authorization: `Bearer ${idToken}`,
         }
@@ -90,7 +90,7 @@ export function CollectionsProvider({ children }) {
     try {
       const idToken = await getIdToken();
       const uid = auth.currentUser.uid;
-      await axios.post(`http://localhost:5000/api/users/${uid}/collections/${collectionName}/flashcards`, flashcard, {
+      await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/users/${uid}/collections/${collectionName}/flashcards`, flashcard, {
         headers: {
           Authorization: `Bearer ${idToken}`,
         }

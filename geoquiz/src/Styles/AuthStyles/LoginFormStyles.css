@@ -1,8 +1,4 @@
-:root {
-    --black: #171717;
-    --grey: #333;
-    --white: #ffffff;
-}
+@import url(../utils/colors.css);
 
 .title{
     color: var(--black);
@@ -66,4 +62,13 @@ input {
     color: red;
     text-align: center;
     margin-top: 1vh;
+}
+
+.forgotPassword {
+    color: var(--black);
+    font-size: 12px;
+}
+
+.forgotPassword:hover {
+    color: var(--blue);
 }

@@ -1,7 +1,4 @@
-:root {
-    --black: #171717;
-    --grey: #DDD;
-}
+@import url(../utils/colors.css);
 
 .container{
     width: 20vw;
@@ -11,7 +8,7 @@
     padding: 20px;
     margin-bottom: 10px;
     border-radius: 10px;
-    border: 1px solid var(--grey);
+    border: 1px solid var(--grey2);
 }
 
 .flashcard-utility {
@@ -23,7 +20,7 @@
     text-align: center;
     font-size: 5vh;
     font-weight: bold;
-    color: var(--grey);
+    color: var(--grey2);
     height: 100%;
 }
 
@@ -60,7 +57,7 @@
 .hint {
     text-align: center;
     font-size: 0.8rem;
-    color: grey;
+    color: var(--grey);
     margin: 0;
 }
 

@@ -42,6 +42,10 @@ This project is divided into two parts: the **Frontend** and the **Backend**. Ea
    npm install axios
    ```
 
+   ```bash
+   npm install dotenv
+   ```
+
 4. **Environment Variables:**
    You will need to create a `.env` file at the root of the `geoquiz` directory with your Firebase configuration details.
 
@@ -55,6 +59,8 @@ This project is divided into two parts: the **Frontend** and the **Backend**. Ea
    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
    NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
    NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
+
+   NEXT_PUBLIC_PORT=5000
    ```
 
 5. **Running the Frontend:**
@@ -65,6 +71,10 @@ This project is divided into two parts: the **Frontend** and the **Backend**. Ea
    ```
 
    The application will be available at `http://localhost:3000`.
+
+6. **Notes**
+   * If you get a Network Error, try changing the port number in both Frontend and Backend.
+   * Make sure that your `NEXT_PUBLIC_PORT` has the same value in both Frontend and Backend.
 
 ---
 
@@ -101,15 +111,28 @@ This project is divided into two parts: the **Frontend** and the **Backend**. Ea
    npm install nodemon
    ```
 
+   ```bash
+   npm install dotenv
+   ```
+
 4. **Service Account Key:**
    You will need to include the `serviceAccountKey.json` file from Firebase for accessing Firebase Admin features. Make sure the `serviceAccountKey.json` file is placed in the `geoquiz-backend` directory. This file contains sensitive information, so be sure **not** to commit it to your repository.
 
-5. **Running the Backend:**
+5. **Environment Variables:**
+   You will need to create a `.env` file on the backend and add the following line of code to the file.
+
+   ```bash
+   NEXT_PUBLIC_PORT=5000
+   ```
+
+6. **Running the Backend:**
    To run the backend with `nodemon` for automatic restarts, use the following command:
 
    ```bash
    nodemon server.js
    ```
+
+   If the server gets any error while deploying, try changing the port on the `.env` to `5001, 5002, ...` 
 
 ---
 

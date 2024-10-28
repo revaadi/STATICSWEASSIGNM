@@ -5,7 +5,6 @@ import Header from "@/Components/Header/HeaderComponent";
 import Footer from "@/Components/HomePage/Footer";
 import { AuthProvider } from "@/Contexts/AuthContext";
 
-
 export default function Home() {
   return (
     <AuthProvider>

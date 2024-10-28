@@ -1,7 +1,4 @@
-:root {
-    --black: #171717;
-    --grey: #DDD;
-}
+@import url(../utils/colors.css);
 
 .flashcard-container {
     width: 50vw;
@@ -10,14 +7,14 @@
     padding: 20px;
     margin-bottom: 10px;
     border-radius: 10px;
-    border: 1px solid var(--grey);
+    border: 1px solid var(--grey2);
 }
 
 .null-component-message {
     text-align: center;
     font-size: 5vh;
     font-weight: bold;
-    color: var(--grey);
+    color: var(--grey2);
     margin-top: 30vh;
 }
 
@@ -43,7 +40,7 @@
 }
 
 .modal {
-    background-color: white;
+    background-color: var(--white);
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

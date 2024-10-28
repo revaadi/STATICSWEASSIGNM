@@ -1,18 +1,15 @@
-:root {
-    --black: #171717;
-    --grey: #333;
-    --white: #ffffff;
-}
+@import url(../utils/colors.css);
 
 .bouncing-title-container {
-    font-size: 5rem;
+    font-size: 8rem;
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
-    color: var(--grey);
-    background-color: var(--white);
+    height: 20vh;
+    color: var(--black);
+    background-color: var(--background);
+    margin-top: 30vh;
 }
 
 

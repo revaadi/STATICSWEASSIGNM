@@ -18,7 +18,8 @@ router.post('/register', async (req, res) => {
           email: email,
           firstname: firstName,
           lastName: lastName,
-          collections: []
+          collections: [],
+          scores: [{date: "2024-10-22", currentScore: 0},{date: "2024-10-23", currentScore: 70},{date: "2024-10-24", currentScore: 100}]
         });
     
         res.status(201).json({ message: 'User registered successfully', uid });
@@ -169,6 +170,29 @@ router.get('/users/:uid/collections/:collectionName', async (req, res) => {
     } catch (error) {
         console.error('Error fetching collection:', error);
         res.status(500).json({ message: 'Error fetching collection', error });
+    }
+});
+
+// Get all scores for a user
+
+router.get('/users/:uid/scores', verifyToken, async(req, res) => {
+    try {
+        const { uid } = req.params;
+
+        const userRef = db.collection('users').doc(uid);
+        const userDoc = await userRef.get();
+
+        if(!userDoc.exists){
+            return res.status(404).json({message: 'User not found'});
+        }
+
+        const userData = userDoc.data();
+        const scores = userData.scores || [];
+
+        res.status(200).json({scores});
+    } catch (error)  {
+        console.error('Error fetching scores:', error);
+        res.status(500).json({ message: 'Error fetching scores', error });
     }
 });
 

@@ -1,6 +1,4 @@
-:root {
-    --black: #171717;
-}
+@import url(../utils/colors.css);
 
 .title {
     text-align: center;

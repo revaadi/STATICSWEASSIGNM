@@ -1,8 +1,4 @@
-:root {
-    --black: #171717;
-    --grey: #333;
-    --white: #ffffff;
-}
+@import url(../utils/colors.css);
 
 .title{
     color: var(--black);
