@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import '../../Styles/FlashcardsStyles/FlashcardsFormStyles.css';
 import { useCollections } from '@/Contexts/CollectionsContext';
 
-function FlascardForm( {collectionName, closeModal}) {
+function FlashcardForm({ collectionName, closeModal }) {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [hint, setHint] = useState('');
@@ -11,7 +11,6 @@ function FlascardForm( {collectionName, closeModal}) {
   const { addFlashcard } = useCollections();
 
   const handleAddFlashcard = async () => {
-
     if (!collectionName) {
       console.log('Collection name is not defined');
       return;
@@ -35,22 +34,35 @@ function FlascardForm( {collectionName, closeModal}) {
     }
   };
 
-  function handleDrop(event) {
-    event.preventDefault();
-    const file = event.dataTransfer.files[0];
-    
+  const handleFileUpload = (file) => {
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = (e) => {
         setImagePreview(e.target.result);
       };
       reader.readAsDataURL(file);
     }
-  }
+  };
 
-  function handleDragOver(event) {
-    event.preventDefault(); 
-  }
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    
+    if (file && file.type.startsWith('image/')) {
+      handleFileUpload(file);
+    } else {
+      console.log('Only image files are allowed');
+    }
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
+  const handleFileSelect = (event) => {
+    const file = event.target.files[0];
+    handleFileUpload(file);
+  };
 
   return (
     <div>
@@ -88,14 +100,22 @@ function FlascardForm( {collectionName, closeModal}) {
         className="image-upload-section"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
+        onClick={() => document.getElementById('fileInput').click()}
       >
         <div className="image-preview" id="imagePreview">
           {imagePreview ? (
             <img src={imagePreview} alt="Uploaded Preview" className="uploaded-image" />
           ) : (
-            <p className='image-status'>Drag and drop an image here</p>
+            <p className='image-status'>Drag and drop an image here or click to select a file</p>
           )}
         </div>
+        <input
+          id="fileInput"
+          type="file"
+          accept="image/*"
+          style={{ display: 'none' }}
+          onChange={handleFileSelect}
+        />
       </div>
 
       <div className="buttons-container">
@@ -103,7 +123,7 @@ function FlascardForm( {collectionName, closeModal}) {
           Create Flashcard
         </button>
 
-        <button className="button" type="submit" onClick={closeModal}>
+        <button className="button" type="button" onClick={closeModal}>
           Cancel
         </button>
       </div>
@@ -111,4 +131,4 @@ function FlascardForm( {collectionName, closeModal}) {
   );
 }
 
-export default FlascardForm;
+export default FlashcardForm;

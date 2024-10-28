@@ -103,12 +103,69 @@ export function CollectionsProvider({ children }) {
         }
       }));
     } catch (error) {
-      console.log('Error adding flashcard', error);
+      if (error.response && error.response.status === 413) {
+        alert("File size is too large. Please upload a smaller image.");
+      } else {
+        console.log('Error adding flashcard', error);
+      }
     }
   };
 
+  // Delete a flashcard from a specific collection
+  const deleteFlashcard = async (collectionName, flashcardIndex) => {
+    try {
+      const idToken = await getIdToken();
+      const uid = auth.currentUser.uid;
+      await axios.delete(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/users/${uid}/collections/${collectionName}/flashcards/${flashcardIndex}`, {
+        headers: {
+          Authorization: `Bearer ${idToken}`,
+        }
+      });
+      
+      setCollectionDetails(prevDetails => ({
+        ...prevDetails,
+        [collectionName]: {
+          ...prevDetails[collectionName],
+          flashcards: prevDetails[collectionName].flashcards.filter((_, index) => index !== flashcardIndex),
+        },
+      }));
+    } catch (error) {
+      console.log('Error deleting flashcard', error);
+    }
+  };
+
+  // Edit a flashcard in a specific collection
+  const editFlashcard = async (collectionName, flashcardIndex, updatedFlashcard) => {
+    try {
+      const idToken = await getIdToken();
+      const uid = auth.currentUser.uid;
+      await axios.put(
+        `http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/users/${uid}/collections/${collectionName}/flashcards/${flashcardIndex}`,
+        updatedFlashcard,
+        {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          }
+        }
+      );
+
+      setCollectionDetails(prevDetails => ({
+        ...prevDetails,
+        [collectionName]: {
+          ...prevDetails[collectionName],
+          flashcards: prevDetails[collectionName].flashcards.map((flashcard, index) =>
+            index === flashcardIndex ? { ...flashcard, ...updatedFlashcard } : flashcard
+          ),
+        },
+      }));
+    } catch (error) {
+      console.log('Error editing flashcard', error);
+    }
+  };
+
+
   return (
-    <CollectionsContext.Provider value={{ collectionNames, collectionDetails, addCollection, addFlashcard }}>
+    <CollectionsContext.Provider value={{ collectionNames, collectionDetails, addCollection, addFlashcard, deleteFlashcard, editFlashcard }}>
       {children}
     </CollectionsContext.Provider>
   );

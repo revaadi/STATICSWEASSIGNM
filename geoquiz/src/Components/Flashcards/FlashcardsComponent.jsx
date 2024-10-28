@@ -28,8 +28,10 @@ function FlashcardsComponent({ component }) {
                 question={flashcard.question}
                 answer={flashcard.answer}
                 hint={flashcard.hint}
+                image={flashcard.image}
                 collectionName={component}
                 parameter="user"
+                index={index}
               />
             ))}
             <FlashcardsContainer parameter="utility" collectionName={component} />

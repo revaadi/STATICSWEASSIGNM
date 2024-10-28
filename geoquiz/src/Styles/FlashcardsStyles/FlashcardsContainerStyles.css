@@ -3,17 +3,46 @@
 .container{
     width: 20vw;
     max-width: 20vw;
-    height: 20vh;
-    max-height: 20vh;
+    height: 35vh;
+    max-height: 35vh;
     padding: 20px;
-    margin-bottom: 10px;
     border-radius: 10px;
     border: 1px solid var(--grey2);
+    position: relative;
+}
+
+
+.flashcard-flip {
+    height: 100%;
+    display: flex;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.flashcard-front,
+.flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    overflow: hidden;
 }
 
 .flashcard-utility {
     width: 20vw;
     max-width: 20vw;
+    height: 30vh;
+    max-height: 30vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,24 +77,25 @@
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
-    margin: 0 0 10px 0;
     color: var(--text);
     max-width: 100%;
     word-wrap: break-word;
+    margin-bottom: 0.5rem;
 }
 
 .hint {
     text-align: center;
     font-size: 0.8rem;
     color: var(--grey);
-    margin: 0;
+    margin-bottom: 0.5rem;
 }
 
 .answer {
     text-align: center;
+    align-items: center;
     font-size: 2rem;
     color: var(--black);
-    margin: 0;
+    margin-top: 20%;
 }
 
 .flashcards-container{
@@ -73,8 +103,46 @@
     max-width: 20vw;
     height: 60vh;
     max-height: 60vh;
-    padding: 20px;
-    margin-bottom: 10px;
     border-radius: 10px;
     border: 1px solid var(--grey);
 }
+
+.icons-container {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: end;
+    padding: 8px;
+    margin-top: 25vh;
+}
+  
+.icon {
+    font-size: 40px;
+    cursor: pointer;
+    padding: 6px;
+    border: 2px solid var(--grey);
+    border-radius: 4px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+  
+.edit-icon {
+    color: var(--grey);
+}
+  
+.delete-icon {
+    color: var(--grey);
+}
+  
+.icon:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+}
+
+.flashcard-image {
+    width: 100%;
+    max-width: 50%;
+    object-fit: contain;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+}
+  

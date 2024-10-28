@@ -196,4 +196,77 @@ router.get('/users/:uid/scores', verifyToken, async(req, res) => {
     }
 });
 
+// Delete a flashcard from a specific collection
+router.delete('/users/:uid/collections/:collectionName/flashcards/:flashcardIndex', verifyToken, async (req, res) => {
+    try {
+        const { uid, collectionName, flashcardIndex } = req.params;
+
+        const userRef = db.collection('users').doc(uid);
+        const userDoc = await userRef.get();
+
+        if (!userDoc.exists) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const userData = userDoc.data();
+        const collection = userData.collections[collectionName];
+
+        if (!collection || !collection.flashcards) {
+            return res.status(404).json({ message: 'Collection or flashcards not found' });
+        }
+
+        const flashcards = collection.flashcards;
+        if (flashcardIndex < 0 || flashcardIndex >= flashcards.length) {
+            return res.status(400).json({ message: 'Invalid flashcard index' });
+        }
+
+        flashcards.splice(flashcardIndex, 1);
+
+        await userRef.update({ [`collections.${collectionName}.flashcards`]: flashcards });
+        res.status(200).json({ message: 'Flashcard deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting flashcard:', error);
+        res.status(500).json({ message: 'Error deleting flashcard', error });
+    }
+});
+
+// Update a flashcard in a specific collection
+router.put('/users/:uid/collections/:collectionName/flashcards/:flashcardIndex', verifyToken, async (req, res) => {
+    try {
+        const { uid, collectionName, flashcardIndex } = req.params;
+        const { question, answer, hint, image } = req.body;
+
+        const userRef = db.collection('users').doc(uid);
+        const userDoc = await userRef.get();
+
+        if (!userDoc.exists) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const userData = userDoc.data();
+        const collection = userData.collections[collectionName];
+
+        if (!collection || !collection.flashcards) {
+            return res.status(404).json({ message: 'Collection or flashcards not found' });
+        }
+
+        if (flashcardIndex < 0 || flashcardIndex >= collection.flashcards.length) {
+            return res.status(400).json({ message: 'Invalid flashcard index' });
+        }
+
+        collection.flashcards[flashcardIndex] = {
+            question,
+            answer,
+            hint: hint || null,
+            image: image || null,
+        };
+
+        await userRef.update({ [`collections.${collectionName}.flashcards`]: collection.flashcards });
+        res.status(200).json({ message: 'Flashcard updated successfully' });
+    } catch (error) {
+        console.error('Error updating flashcard:', error);
+        res.status(500).json({ message: 'Error updating flashcard', error });
+    }
+});
+
 module.exports = router;
