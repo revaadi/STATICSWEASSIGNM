@@ -1,0 +1,24 @@
+:root {
+    --black: #171717;
+    --grey: #333;
+    --white: #ffffff;
+    --greybckg: #f0f0f0;
+    --blue: #0070f3;
+}
+
+.footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--greybckg);
+    padding: 10px 20px;
+}
+  
+.group-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--grey);
+    text-align: right;
+}
+  
