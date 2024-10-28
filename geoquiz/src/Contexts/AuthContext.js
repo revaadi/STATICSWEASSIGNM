@@ -23,6 +23,14 @@ export function AuthProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
+  const refreshToken = async () => {
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      return await currentUser.getIdToken(true);
+    }
+    return null;
+  };
+
   const login = async (email, password) => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -87,7 +95,7 @@ export function AuthProvider({ children }) {
 
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, refreshToken }}>
       {!loading && children}
     </AuthContext.Provider>
   );

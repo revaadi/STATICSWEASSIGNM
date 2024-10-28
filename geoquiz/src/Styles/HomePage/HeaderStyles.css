@@ -1,24 +1,19 @@
-:root {
-    --black: #171717;
-    --grey: #333;
-    --white: #ffffff;
-    --greybckg: #f0f0f0;
-    --blue: #0070f3;
-}
+@import url(../utils/colors.css);
+
 
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: var(--greybckg);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--headerfooterbckg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
   
   .logo h1 {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: var(--text);
   }
   
   .nav-links ul {
@@ -34,11 +29,11 @@
   
   .nav-links a {
     text-decoration: none;
-    color: #333;
+    color: var(--text);
     font-weight: 500;
     font-size: 1.5rem;
   }
   
   .nav-links a:hover {
-    color: var(--blue);
+    color: var(--text-hover);
   }

@@ -17,7 +17,8 @@ function LoginForm() {
     e.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const idToken = await userCredential.user.getIdToken();
+      const idToken = await userCredential.user.getIdToken(true);
+      console.log('Token:', idToken);
 
       const response = await axios.post("http://localhost:5000/api/login", { idToken });
 

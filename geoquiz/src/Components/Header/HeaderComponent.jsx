@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../../Contexts/AuthContext';
-import '../../Styles/FlashcardsStyles/HeaderStyles.css';
+import '../../Styles/HomePage/HeaderStyles.css';
 import { useRouter } from "next/navigation";
 
 function Header() {
