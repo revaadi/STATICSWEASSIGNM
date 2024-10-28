@@ -14,10 +14,19 @@ function FlashcardsComponent({ component }) {
     }
   }, [component, collectionDetails]);
 
+  const handleDeleteFlashcard = (flashcardToDelete) => {
+    setSelectedCollection((prevCollection) => ({
+      ...prevCollection,
+      flashcards: prevCollection.flashcards.filter(
+        (flashcard) => flashcard.question !== flashcardToDelete.question
+      ),
+    }));
+  };
+
   return (
     <div className='flashcard-container'>
       {component === null ? (
-        <p className='null-component-message'>Pick or Create a new Collection</p>
+        <p className='null-component-message'>Pick or a Create new Collection</p>
       ) : (
         <div>
           <h2 className='title'>{component}</h2>
@@ -30,6 +39,7 @@ function FlashcardsComponent({ component }) {
                 hint={flashcard.hint}
                 collectionName={component}
                 parameter="user"
+                onDelete={() => handleDeleteFlashcard(flashcard)} 
               />
             ))}
             <FlashcardsContainer parameter="utility" collectionName={component} />
